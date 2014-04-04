@@ -10,4 +10,4 @@ I would **use IntelliJ IDEA** to work with this project
 - in IDEA's Run/Debug Configurations "Command Line" field: `exec:java -Dexec.mainClass="TweetGenerator" -Dexec.args="<your OAUTH>"`
 - bash: `mvn exec:java -Dexec.mainClass="TweetGenerator" -Dexec.args="<your OAUTH>"`
 
-*<your OAUTH> is your 4 oauth twitter credentials separated by a space, in the order they are read in the main function in TweetProducer.java
+* \<your OAUTH\> is your 4 oauth twitter credentials separated by a space, in the order they are read in the main function in TweetProducer.java
