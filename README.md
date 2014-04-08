@@ -25,5 +25,5 @@ $ ~/kafka/bin/kafka-create-topic.sh --topic tweets --zookeeper localhost:2181
 
 Consume the data in the command line:
 ``` bash
-$ ~/kafka/bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic page_visits --from-beginning
+$ ~/kafka/bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic tweets --from-beginning
 ```
