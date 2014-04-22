@@ -51,7 +51,7 @@ public class TweetProducer {
         // add some track terms
         List<String> terms = new ArrayList<String>();
         terms.add("beer");
-        terms.add("brewery");
+        terms.add("wine");
         endpoint.trackTerms(terms);
 
         Authentication auth = new OAuth1(consumerKey, consumerSecret, token, secret);
