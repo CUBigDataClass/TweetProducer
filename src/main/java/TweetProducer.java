@@ -18,7 +18,6 @@ import kafka.producer.KeyedMessage;
 import kafka.producer.ProducerConfig;
 
 public class TweetProducer {
-    private static final int nTweets = 1000;
     private static final int memQsize = 100;
 
     public static void main(String[] args) {
@@ -51,7 +50,25 @@ public class TweetProducer {
         // add some track terms
         List<String> terms = new ArrayList<String>();
         terms.add("beer");
+        terms.add("stout");
+        terms.add("tripel");
+        terms.add("dubbel");
+        terms.add("porter");
+        terms.add("pale ale");
+        terms.add("IPA");
+        terms.add("lager");
+
         terms.add("wine");
+        terms.add("pinot noir");
+        terms.add("merlot");
+        terms.add("cabernet sauvignon");
+        terms.add("chianti");
+        terms.add("malbec");
+        terms.add("zinfandel");
+        terms.add("chardonnay");
+        terms.add("pinot grigio");
+        terms.add("riesling");
+
         endpoint.trackTerms(terms);
 
         Authentication auth = new OAuth1(consumerKey, consumerSecret, token, secret);
@@ -71,17 +88,21 @@ public class TweetProducer {
         System.out.println("Connected!");
 
         // Send tweets to Kafka
-        for (int msgRead = 0; msgRead < nTweets; msgRead++) {
-            String msg = queue.take();
-            KeyedMessage<String, String> data = new KeyedMessage<String, String>("tweets", "" + msgRead, msg);
-            producer.send(data);
-            System.out.println(msgRead + " completed");
+        try {
+            long msgRead = 0;
+            while (true) {
+                String msg = queue.take();
+                KeyedMessage<String, String> data = new KeyedMessage<String, String>("tweets", "" + msgRead, msg);
+                producer.send(data);
+                System.out.println(msgRead + " completed");
+                msgRead++;
+            }
+        } catch(InterruptedException e) {
+            System.out.println("Closing twitter connection...");
+            client.stop();
+            System.out.println("Stopping producer...");
+            producer.close();
+            System.out.println("Done!");
         }
-
-        System.out.println("Closing twitter connection...");
-        client.stop();
-        System.out.println("Stopping producer...");
-        producer.close();
-        System.out.println("Done!");
     }
 }
